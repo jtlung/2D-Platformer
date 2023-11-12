@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://s8x4bfbbahoq"]
+
+[ext_resource type="Script" path="res://Terrain.gd" id="1_44th0"]
+[ext_resource type="Texture2D" uid="uid://3dg2de3e006m" path="res://Assets/dirt.png" id="2_ohdfd"]
+
+[node name="Terrain" type="StaticBody2D"]
+collision_layer = 2
+script = ExtResource("1_44th0")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_ohdfd")
+texture_scale = Vector2(0.1, 0.1)
+texture_rotation = -1.15366
+polygon = PackedVector2Array(-224, 128, -224, 1536, 11488, 1536, 11488, -3680, 11008, -3712, 10528, -1952, 9696, 544, 8416, 1088, 7360, 1056, 6400, 256, 3840, 128, 3456, 384, 3264, 480, 2944, 608, 2368, 704, 2208, 640, 1984, 480, 1760, 320, 1408, 320, 1152, 448, 928, 576, 640, 512, 416, 416, 256, 384, 128, 256, 0, 128)
