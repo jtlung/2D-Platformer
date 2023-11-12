@@ -9,7 +9,8 @@ Built with Godot 4.1
 ## What Makes this a Game?
 
 ## References
-Character Spritesheet from the canvas file download
+Character sprites by me
+Terrain Template by Coder Nunk: https://www.youtube.com/watch?v=3mFLDT04-qM
 
 ## Future Development
 
