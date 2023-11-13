@@ -1,25 +1,69 @@
 extends CharacterBody2D
 
-
-const maxSpeed = 750.0
+var maxSpeed = 750.0
 const walkSpeed = 200
-const jumpForce = -400.0
+const jumpForce = -500.0
 var currentSpeed = 0.0
 var acceleration = 35
 var deceleration = 15
 var running = false
+var lastJump = Time.get_ticks_msec()
+var canHoldJump = false
+var attacking = false
+var canAttack = true
+var recovery = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func attack():
+	attacking = true
+	canAttack = false
+	var lookPoint = get_global_mouse_position()
+	var lookVec = position.direction_to(lookPoint).normalized()
+	velocity = lookVec*abs(900)
+	currentSpeed = velocity.x
+	$Sprite.modulate = Color(10,10,10)
+	$HitBox.active = true
+	$HurtBox.monitorable = false
+	await get_tree().create_timer(0.2).timeout
+	$HitBox.active = false
+	$Sprite.modulate = Color(1,1,1)
+	attacking = false
+	if not $HitBox.hit:
+		recovery = true
+		await get_tree().create_timer(1.2).timeout
+		recovery = false
+	$HurtBox.monitorable = true
+	$HitBox.hit = false
+	canAttack = true
+
+func shadowed():
+	var container = get_node_or_null("/root/Game/Effects")
+	if container:
+		var shadow = $Sprite.duplicate()
+		shadow.global_position = global_position
+		shadow.z_index = 1
+		shadow.modulate.a = .5
+		container.add_child(shadow)
+		shadow.pause()
+		shadow.animation = $Sprite.animation
+		shadow.frame = $Sprite.frame
+		var tween = get_tree().create_tween()
+		tween.tween_property(shadow, "modulate:a", 0, .1)
+		tween.tween_callback(shadow.queue_free)
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
+	# Gravity an
+	if Input.is_action_just_released("Jump"):
+		canHoldJump = false
+	if (not (Input.is_action_pressed("Jump") and canHoldJump) or Time.get_ticks_msec()-lastJump >= 500):
+		canHoldJump = false
 		velocity.y += gravity * delta
+	if not is_on_floor():
 		if Input.is_action_pressed("Dash"):
 			velocity.y = clamp(velocity.y,-999999,50)
-		if not ($Sprite.animation == "Jump" and $Sprite.is_playing() and $Sprite.animation != "Fall"):
+		if $Sprite.animation != "Fall" and not ($Sprite.animation == "Jump" and $Sprite.is_playing()) and (not Input.is_action_pressed("Jump") or Time.get_ticks_msec()-lastJump >= 500):
 			$Sprite.play("Fall")
 	elif abs(velocity.x) > 50:
 		if running:
@@ -27,15 +71,19 @@ func _physics_process(delta):
 		else:
 			$Sprite.play("Walk")
 	else:
-		$Sprite.animation = "Idle"
+		$Sprite.play("Idle")
 	# Handle Jump.
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+	if not attacking and not recovery and Input.is_action_just_pressed("Jump") and is_on_floor():
+		canHoldJump = true
+		lastJump = Time.get_ticks_msec()
 		$Sprite.play("Jump")
 		velocity.y = jumpForce
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("Left", "Right")
+	if attacking or recovery:
+		direction = null
 	var targetSpeed = walkSpeed
 	if Input.is_action_pressed("Run"):
 		running = true
@@ -60,10 +108,29 @@ func _physics_process(delta):
 		currentSpeed = 0
 	currentSpeed = clamp(currentSpeed,-maxSpeed,maxSpeed)
 	var ray = $RayCast2D
-	ray.target_position.x = 22*sign(currentSpeed)
-	if ray.is_colliding():
+	ray.target_position.x = 18*sign(currentSpeed)
+	if ray.is_colliding() and not attacking:
 		currentSpeed = -currentSpeed/2
-		if abs(currentSpeed*2) < 100:
-			currentSpeed = 0
-	velocity.x = currentSpeed
+	if abs(currentSpeed) == maxSpeed or attacking:
+		shadowed()
+	if not attacking:
+		velocity.x = currentSpeed
+	rotation = 0
+	if is_on_floor():
+		var angle = -get_floor_normal().angle_to(Vector2.UP)
+		rotation = angle
+	if Input.is_action_just_pressed("Attack") and not attacking and canAttack:
+		attack()
 	move_and_slide()
+	
+
+
+
+func _on_void_detect_area_entered(area):
+	if area.name == "Void":
+		queue_free()
+		
+		
+func hit():
+	if not attacking:
+		queue_free()

@@ -14,4 +14,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if Engine.is_editor_hint():
+		$Line2D.global_position = $Polygon2D.global_position
+		$Line2D.scale = $Polygon2D.scale
+		var points := PackedVector2Array($Polygon2D.polygon)
+		points.append($Polygon2D.polygon[0])
+		$Line2D.points = points

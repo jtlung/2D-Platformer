@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkgy2p5iqqaki"]
+
+[ext_resource type="Script" path="res://terrainline.gd" id="1_7cf1i"]
+[ext_resource type="Texture2D" uid="uid://3dg2de3e006m" path="res://Assets/dirt.png" id="2_ul8qh"]
+[ext_resource type="Texture2D" uid="uid://b42t0p8iiwtkk" path="res://Assets/grass.png" id="3_oxm4e"]
+
+[node name="dirt_grass" type="StaticBody2D"]
+collision_layer = 2
+script = ExtResource("1_7cf1i")
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+points = PackedVector2Array(64, 32, 64, 256, 384, 256, 384, 32, 64, 32)
+width = 50.0
+texture = ExtResource("3_oxm4e")
+texture_mode = 1
+joint_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_ul8qh")
+polygon = PackedVector2Array(64, 32, 64, 256, 384, 256, 384, 32)
