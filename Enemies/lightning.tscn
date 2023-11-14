@@ -77,7 +77,7 @@ debug_color = Color(0.898039, 0, 0.294118, 0.419608)
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_kykmj")
 autoplay = "default"
-frame_progress = 0.506134
+frame_progress = 0.777511
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

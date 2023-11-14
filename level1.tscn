@@ -1,0 +1,161 @@
+[gd_scene load_steps=9 format=3 uid="uid://lgkjieaknk0c"]
+
+[ext_resource type="PackedScene" uid="uid://bkgy2p5iqqaki" path="res://dirt_grass.tscn" id="1_2kx76"]
+[ext_resource type="PackedScene" uid="uid://qb3rxxuyfl4x" path="res://Enemies/Slime.tscn" id="2_qyxxj"]
+[ext_resource type="PackedScene" uid="uid://boef1vudhbgkf" path="res://Enemies/Cloud.tscn" id="3_vsw2m"]
+[ext_resource type="Script" path="res://Player_Container.gd" id="4_j7lcv"]
+[ext_resource type="PackedScene" uid="uid://dtexigkhgtolg" path="res://Player/player.tscn" id="5_7tbbn"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="6_ql6dw"]
+[ext_resource type="Theme" uid="uid://cxvj114cqd3ke" path="res://Assets/main.tres" id="7_7ixye"]
+[ext_resource type="Texture2D" uid="uid://bgte73hl752rf" path="res://Assets/heart.png" id="7_bw2m0"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Map" type="Node" parent="."]
+
+[node name="Void" type="Area2D" parent="Map"]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Void"]
+polygon = PackedVector2Array(-128, 864, 7680, 864, 7680, 1312, 7680, 2304, -128, 2304)
+
+[node name="Borders" type="StaticBody2D" parent="Map"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Borders"]
+polygon = PackedVector2Array(-480, -2368, -480, 2368, 8401.93, 2368, 9792, 2336, 9856, -2272, 9312, -2272, 9312, 2176, -320, 2240, -320, -2368)
+
+[node name="Terrain" type="Node2D" parent="Map"]
+
+[node name="dirt_grass" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
+
+[node name="Line2D" parent="Map/Terrain/dirt_grass" index="0"]
+position = Vector2(-192, 352)
+points = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 11840, 832, 11840, -160, 8384, -160, 8000, -32, 6336, -32, 6336, 800, 3328, 800, 3328, -224, 3104, -224, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0, 768, 0, 768, -64, 672, -64, 672, 0, -1344, 0)
+
+[node name="Polygon2D" parent="Map/Terrain/dirt_grass" index="1"]
+position = Vector2(-192, 352)
+polygon = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 11840, 832, 11840, -160, 8384, -160, 8000, -32, 6336, -32, 6336, 800, 3328, 800, 3328, -224, 3104, -224, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0, 768, 0, 768, -64, 672, -64, 672, 0)
+
+[node name="grass platform" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform" index="0"]
+position = Vector2(-192, 320)
+points = PackedVector2Array(1568, -32, 1568, 32, 2080, 32, 2080, -32, 1568, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform" index="1"]
+position = Vector2(-192, 320)
+polygon = PackedVector2Array(1568, -32, 1568, 32, 2080, 32, 2080, -32)
+
+[node name="grass platform3" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform3" index="0"]
+position = Vector2(1824, 320)
+points = PackedVector2Array(1600, -32, 1600, 32, 1984, 32, 1984, -32, 1600, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform3" index="1"]
+position = Vector2(1824, 320)
+polygon = PackedVector2Array(1600, -32, 1600, 32, 1984, 32, 1984, -32)
+
+[node name="grass platform4" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform4" index="0"]
+position = Vector2(2752, 320)
+points = PackedVector2Array(1600, -32, 1600, 32, 1952, 32, 1952, -32, 1600, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform4" index="1"]
+position = Vector2(2752, 320)
+polygon = PackedVector2Array(1600, -32, 1600, 32, 1952, 32, 1952, -32)
+
+[node name="grass platform5" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform5" index="0"]
+position = Vector2(3744, 320)
+points = PackedVector2Array(1568, -32, 1568, 32, 1952, 32, 1952, -32, 1728.65, -32, 1568, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform5" index="1"]
+position = Vector2(3744, 320)
+polygon = PackedVector2Array(1568, -32, 1568, 32, 1952, 32, 1952, -32, 1728.65, -32)
+
+[node name="Collectibles" type="Node" parent="."]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Slime4" parent="Enemies" instance=ExtResource("2_qyxxj")]
+position = Vector2(2336, 320)
+
+[node name="Slime5" parent="Enemies" instance=ExtResource("2_qyxxj")]
+position = Vector2(1664, 256)
+
+[node name="Slime6" parent="Enemies" instance=ExtResource("2_qyxxj")]
+position = Vector2(864, 320)
+
+[node name="Slime2" parent="Enemies" instance=ExtResource("2_qyxxj")]
+position = Vector2(6592, 288)
+
+[node name="Slime8" parent="Enemies" instance=ExtResource("2_qyxxj")]
+position = Vector2(7552, 288)
+
+[node name="Cloud" parent="Enemies" instance=ExtResource("3_vsw2m")]
+position = Vector2(2624, 160)
+
+[node name="Cloud2" parent="Enemies" instance=ExtResource("3_vsw2m")]
+position = Vector2(5024, 64)
+
+[node name="Cloud3" parent="Enemies" instance=ExtResource("3_vsw2m")]
+position = Vector2(5952, 64)
+
+[node name="Cloud4" parent="Enemies" instance=ExtResource("3_vsw2m")]
+position = Vector2(7136, 96)
+
+[node name="Player_Container" type="Node" parent="."]
+script = ExtResource("4_j7lcv")
+
+[node name="Player" parent="Player_Container" instance=ExtResource("5_7tbbn")]
+position = Vector2(0, 288)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.85, 0.85)
+limit_bottom = 800
+script = ExtResource("6_ql6dw")
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_7ixye")
+
+[node name="Hearts" type="Container" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Heart" type="TextureRect" parent="UI/HUD/Hearts"]
+layout_mode = 2
+texture = ExtResource("7_bw2m0")
+stretch_mode = 4
+
+[node name="Heart2" type="TextureRect" parent="UI/HUD/Hearts"]
+layout_mode = 2
+texture = ExtResource("7_bw2m0")
+stretch_mode = 4
+
+[node name="Heart3" type="TextureRect" parent="UI/HUD/Hearts"]
+layout_mode = 2
+texture = ExtResource("7_bw2m0")
+stretch_mode = 4
+
+[editable path="Map/Terrain/dirt_grass"]
+[editable path="Map/Terrain/grass platform"]
+[editable path="Map/Terrain/grass platform3"]
+[editable path="Map/Terrain/grass platform4"]
+[editable path="Map/Terrain/grass platform5"]

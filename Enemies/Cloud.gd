@@ -7,7 +7,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func hit():
@@ -50,5 +50,5 @@ func _on_sprite_animation_finished():
 
 
 func _on_sprite_frame_changed():
-	if $Sprite.animation == "attack" and $Sprite.frame == 4:
+	if $Sprite.animation == "attack" and $Sprite.frame == 5:
 		attack()
