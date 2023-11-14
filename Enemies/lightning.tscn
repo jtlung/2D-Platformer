@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://bttbn1ok55ilj"]
+
+[ext_resource type="Texture2D" uid="uid://bkmtnb00l7y20" path="res://Assets/lightning.png" id="1_5ckpj"]
+[ext_resource type="Script" path="res://Enemies/lightning.gd" id="1_6wunm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ir73"]
+size = Vector2(50, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6sto"]
+atlas = ExtResource("1_5ckpj")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0isj8"]
+atlas = ExtResource("1_5ckpj")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bllk0"]
+atlas = ExtResource("1_5ckpj")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p7u5"]
+atlas = ExtResource("1_5ckpj")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfx70"]
+atlas = ExtResource("1_5ckpj")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msjn4"]
+atlas = ExtResource("1_5ckpj")
+region = Rect2(400, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7evo"]
+atlas = ExtResource("1_5ckpj")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kykmj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6sto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0isj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bllk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p7u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfx70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msjn4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7evo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="Lightning" type="Area2D"]
+scale = Vector2(0.75, 0.75)
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("1_6wunm")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0ir73")
+debug_color = Color(0.898039, 0, 0.294118, 0.419608)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_kykmj")
+autoplay = "default"
+frame_progress = 0.506134
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

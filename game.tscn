@@ -1,80 +1,113 @@
-[gd_scene load_steps=6 format=3 uid="uid://lgkjieaknk0c"]
+[gd_scene load_steps=8 format=3 uid="uid://lgkjieaknk0c"]
 
 [ext_resource type="PackedScene" uid="uid://bkgy2p5iqqaki" path="res://dirt_grass.tscn" id="1_15bs6"]
 [ext_resource type="PackedScene" uid="uid://dtexigkhgtolg" path="res://Player/player.tscn" id="3_0sxk5"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="3_3d2g6"]
 [ext_resource type="Script" path="res://Player_Container.gd" id="3_jd45j"]
+[ext_resource type="PackedScene" uid="uid://boef1vudhbgkf" path="res://Enemies/Cloud.tscn" id="3_n2bb6"]
 [ext_resource type="PackedScene" uid="uid://qb3rxxuyfl4x" path="res://Enemies/Slime.tscn" id="6_1x8yh"]
+[ext_resource type="Texture2D" uid="uid://by78sv10i4pqc" path="res://Assets/coin.png" id="7_wpv58"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Map" type="Node" parent="."]
+[node name="Level" type="Node" parent="."]
 
-[node name="Void" type="Area2D" parent="Map"]
+[node name="Void" type="Area2D" parent="Level"]
 collision_layer = 32768
 collision_mask = 32768
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Void"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/Void"]
 polygon = PackedVector2Array(-128, 864, 7680, 864, 7680, 1312, 7680, 2304, -128, 2304)
 
-[node name="Borders" type="StaticBody2D" parent="Map"]
+[node name="Borders" type="StaticBody2D" parent="Level"]
+collision_layer = 3
+collision_mask = 3
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Borders"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/Borders"]
 polygon = PackedVector2Array(-480, -2368, -480, 2368, 8401.93, 2368, 8672, 2368, 8640, -2304, 8448, -2304, 8448, 2272, -96, 2240, -96, -2368)
 
-[node name="Terrain" type="Node2D" parent="Map"]
+[node name="Terrain" type="Node2D" parent="Level"]
 
-[node name="dirt_grass" parent="Map/Terrain" instance=ExtResource("1_15bs6")]
+[node name="dirt_grass" parent="Level/Terrain" instance=ExtResource("1_15bs6")]
 
-[node name="Line2D" parent="Map/Terrain/dirt_grass" index="0"]
+[node name="Line2D" parent="Level/Terrain/dirt_grass" index="0"]
 position = Vector2(-192, 352)
 points = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 9280, 864, 9280, -32, 6336, -32, 6336, 800, 3328, 800, 3328, -224, 3104, -224, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0, 768, 0, 768, -64, 672, -64, 672, 0, -1344, 0)
 
-[node name="Polygon2D" parent="Map/Terrain/dirt_grass" index="1"]
+[node name="Polygon2D" parent="Level/Terrain/dirt_grass" index="1"]
 position = Vector2(-192, 352)
 polygon = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 9280, 864, 9280, -32, 6336, -32, 6336, 800, 3328, 800, 3328, -224, 3104, -224, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0, 768, 0, 768, -64, 672, -64, 672, 0)
 
-[node name="grass platform" parent="Map/Terrain" instance=ExtResource("1_15bs6")]
+[node name="grass platform" parent="Level/Terrain" instance=ExtResource("1_15bs6")]
 
-[node name="Line2D" parent="Map/Terrain/grass platform" index="0"]
+[node name="Line2D" parent="Level/Terrain/grass platform" index="0"]
 position = Vector2(-192, 320)
 points = PackedVector2Array(1600, -32, 1600, 32, 2080, 32, 2080, -32, 1600, -32)
 
-[node name="Polygon2D" parent="Map/Terrain/grass platform" index="1"]
+[node name="Polygon2D" parent="Level/Terrain/grass platform" index="1"]
 position = Vector2(-192, 320)
 polygon = PackedVector2Array(1600, -32, 1600, 32, 2080, 32, 2080, -32)
 
-[node name="grass platform3" parent="Map/Terrain" instance=ExtResource("1_15bs6")]
+[node name="grass platform3" parent="Level/Terrain" instance=ExtResource("1_15bs6")]
 
-[node name="Line2D" parent="Map/Terrain/grass platform3" index="0"]
+[node name="Line2D" parent="Level/Terrain/grass platform3" index="0"]
 position = Vector2(1824, 320)
 points = PackedVector2Array(1600, -32, 1600, 32, 1984, 32, 1984, -32, 1600, -32)
 
-[node name="Polygon2D" parent="Map/Terrain/grass platform3" index="1"]
+[node name="Polygon2D" parent="Level/Terrain/grass platform3" index="1"]
 position = Vector2(1824, 320)
 polygon = PackedVector2Array(1600, -32, 1600, 32, 1984, 32, 1984, -32)
 
-[node name="grass platform4" parent="Map/Terrain" instance=ExtResource("1_15bs6")]
+[node name="grass platform4" parent="Level/Terrain" instance=ExtResource("1_15bs6")]
 
-[node name="Line2D" parent="Map/Terrain/grass platform4" index="0"]
+[node name="Line2D" parent="Level/Terrain/grass platform4" index="0"]
 position = Vector2(2752, 320)
 points = PackedVector2Array(1600, -32, 1600, 32, 1952, 32, 1952, -32, 1600, -32)
 
-[node name="Polygon2D" parent="Map/Terrain/grass platform4" index="1"]
+[node name="Polygon2D" parent="Level/Terrain/grass platform4" index="1"]
 position = Vector2(2752, 320)
 polygon = PackedVector2Array(1600, -32, 1600, 32, 1952, 32, 1952, -32)
 
-[node name="grass platform5" parent="Map/Terrain" instance=ExtResource("1_15bs6")]
+[node name="grass platform5" parent="Level/Terrain" instance=ExtResource("1_15bs6")]
 
-[node name="Line2D" parent="Map/Terrain/grass platform5" index="0"]
+[node name="Line2D" parent="Level/Terrain/grass platform5" index="0"]
 position = Vector2(3744, 320)
 points = PackedVector2Array(1568, -32, 1568, 32, 1952, 32, 1952, -32, 1728.65, -32, 1568, -32)
 
-[node name="Polygon2D" parent="Map/Terrain/grass platform5" index="1"]
+[node name="Polygon2D" parent="Level/Terrain/grass platform5" index="1"]
 position = Vector2(3744, 320)
 polygon = PackedVector2Array(1568, -32, 1568, 32, 1952, 32, 1952, -32, 1728.65, -32)
 
 [node name="Collectibles" type="Node" parent="."]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Slime4" parent="Enemies" instance=ExtResource("6_1x8yh")]
+position = Vector2(2336, 320)
+
+[node name="Slime5" parent="Enemies" instance=ExtResource("6_1x8yh")]
+position = Vector2(1664, 256)
+
+[node name="Slime6" parent="Enemies" instance=ExtResource("6_1x8yh")]
+position = Vector2(1184, 320)
+
+[node name="Slime2" parent="Enemies" instance=ExtResource("6_1x8yh")]
+position = Vector2(6592, 288)
+
+[node name="Slime8" parent="Enemies" instance=ExtResource("6_1x8yh")]
+position = Vector2(7552, 288)
+
+[node name="Cloud" parent="Enemies" instance=ExtResource("3_n2bb6")]
+position = Vector2(2752, 160)
+
+[node name="Cloud2" parent="Enemies" instance=ExtResource("3_n2bb6")]
+position = Vector2(5024, 64)
+
+[node name="Cloud3" parent="Enemies" instance=ExtResource("3_n2bb6")]
+position = Vector2(5952, 64)
+
+[node name="Cloud4" parent="Enemies" instance=ExtResource("3_n2bb6")]
+position = Vector2(7136, 96)
 
 [node name="Player_Container" type="Node" parent="."]
 script = ExtResource("3_jd45j")
@@ -87,19 +120,24 @@ zoom = Vector2(0.85, 0.85)
 limit_bottom = 800
 script = ExtResource("3_3d2g6")
 
-[node name="Slime" parent="." instance=ExtResource("6_1x8yh")]
-position = Vector2(2528, 320)
-
-[node name="Slime2" parent="." instance=ExtResource("6_1x8yh")]
-position = Vector2(6592, 288)
-
-[node name="Slime3" parent="." instance=ExtResource("6_1x8yh")]
-position = Vector2(7136, 288)
-
 [node name="Effects" type="Node" parent="."]
 
-[editable path="Map/Terrain/dirt_grass"]
-[editable path="Map/Terrain/grass platform"]
-[editable path="Map/Terrain/grass platform3"]
-[editable path="Map/Terrain/grass platform4"]
-[editable path="Map/Terrain/grass platform5"]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_wpv58")
+
+[editable path="Level/Terrain/dirt_grass"]
+[editable path="Level/Terrain/grass platform"]
+[editable path="Level/Terrain/grass platform3"]
+[editable path="Level/Terrain/grass platform4"]
+[editable path="Level/Terrain/grass platform5"]

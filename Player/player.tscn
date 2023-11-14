@@ -357,7 +357,7 @@ size = Vector2(32, 69)
 size = Vector2(60, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bf2k"]
-size = Vector2(50, 90)
+size = Vector2(89, 100)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
@@ -372,7 +372,7 @@ sprite_frames = SubResource("SpriteFrames_oyi2y")
 animation = &"Fall"
 autoplay = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_kimmx")
 debug_color = Color(0, 0.631373, 0.447059, 0.419608)

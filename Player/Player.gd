@@ -19,38 +19,43 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func attack():
 	attacking = true
 	canAttack = false
+	$HitBox.hit = false
 	var lookPoint = get_global_mouse_position()
 	var lookVec = position.direction_to(lookPoint).normalized()
 	velocity = lookVec*abs(900)
 	currentSpeed = velocity.x
-	$Sprite.modulate = Color(10,10,10)
+	$Sprite.self_modulate = Color(10,10,10)
 	$HitBox.active = true
-	$HurtBox.monitorable = false
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.25).timeout
 	$HitBox.active = false
-	$Sprite.modulate = Color(1,1,1)
+	$Sprite.self_modulate = Color(1,1,1)
 	attacking = false
 	if not $HitBox.hit:
 		recovery = true
-		await get_tree().create_timer(1.2).timeout
+		await get_tree().create_timer(.6).timeout
+		$HitBox.hit = false
 		recovery = false
-	$HurtBox.monitorable = true
-	$HitBox.hit = false
+		await get_tree().create_timer(1.4).timeout
+		canAttack = true
 	canAttack = true
 
 func shadowed():
 	var container = get_node_or_null("/root/Game/Effects")
 	if container:
 		var shadow = $Sprite.duplicate()
+		var time = .1
+		var opacity = .5
+		if attacking:
+			opacity = 1
 		shadow.global_position = global_position
 		shadow.z_index = 1
-		shadow.modulate.a = .5
+		shadow.modulate.a = opacity
 		container.add_child(shadow)
 		shadow.pause()
 		shadow.animation = $Sprite.animation
 		shadow.frame = $Sprite.frame
 		var tween = get_tree().create_tween()
-		tween.tween_property(shadow, "modulate:a", 0, .1)
+		tween.tween_property(shadow, "modulate:a", 0, time)
 		tween.tween_callback(shadow.queue_free)
 
 func _physics_process(delta):

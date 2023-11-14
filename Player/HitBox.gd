@@ -16,4 +16,3 @@ func _process(_delta):
 			if hurtBox.get_owner().has_method("hit"):
 				hit = true
 				hurtBox.get_owner().hit()
-				print("bingo!")
