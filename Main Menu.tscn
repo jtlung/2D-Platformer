@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Main Menu.gd" id="2_resid"]
 [ext_resource type="Texture2D" uid="uid://bb71q5flbhq66" path="res://Assets/mainmenu.png" id="3_8hgss"]
 
-[node name="Node2D" type="Control"]
+[node name="Main_Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

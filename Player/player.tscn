@@ -357,7 +357,7 @@ size = Vector2(32, 69)
 size = Vector2(60, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bf2k"]
-size = Vector2(89, 100)
+size = Vector2(80, 90)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2

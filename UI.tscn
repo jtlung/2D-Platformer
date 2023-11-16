@@ -1,0 +1,183 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdjlkup0xv400"]
+
+[ext_resource type="Theme" uid="uid://cxvj114cqd3ke" path="res://Assets/main.tres" id="1_jj03b"]
+[ext_resource type="Script" path="res://HUD.gd" id="2_8bhxl"]
+[ext_resource type="Texture2D" uid="uid://bgte73hl752rf" path="res://Assets/heart.png" id="3_apbt0"]
+[ext_resource type="Script" path="res://Menu.gd" id="4_2mgg8"]
+[ext_resource type="Script" path="res://OVER.gd" id="5_w04t1"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HUD" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jj03b")
+script = ExtResource("2_8bhxl")
+
+[node name="Lives" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_right = 224.0
+grow_vertical = 0
+
+[node name="Heart" type="TextureRect" parent="HUD/Lives"]
+layout_mode = 2
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("3_apbt0")
+stretch_mode = 4
+
+[node name="Heart2" type="TextureRect" parent="HUD/Lives"]
+layout_mode = 2
+offset_left = 64.0
+offset_right = 164.0
+offset_bottom = 100.0
+texture = ExtResource("3_apbt0")
+stretch_mode = 4
+
+[node name="Heart3" type="TextureRect" parent="HUD/Lives"]
+layout_mode = 2
+offset_left = 128.0
+offset_right = 228.0
+offset_bottom = 100.0
+texture = ExtResource("3_apbt0")
+stretch_mode = 4
+
+[node name="Score" type="Label" parent="HUD"]
+layout_mode = 1
+offset_right = 253.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 40
+text = "SCORE: 000"
+
+[node name="Time" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -253.0
+offset_bottom = 63.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "TIME: 180"
+horizontal_alignment = 2
+
+[node name="Timer" type="Timer" parent="HUD"]
+process_mode = 1
+autostart = true
+
+[node name="Menu" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jj03b")
+script = ExtResource("4_2mgg8")
+
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.537255)
+
+[node name="Resume" type="Button" parent="Menu"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -73.0
+offset_right = 105.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "RESUME"
+
+[node name="Menu" type="Button" parent="Menu"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 2.0
+offset_right = 100.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Menu
+"
+
+[node name="OVER" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jj03b")
+script = ExtResource("5_w04t1")
+
+[node name="ColorRect" type="ColorRect" parent="OVER"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.792157)
+
+[node name="Label" type="Label" parent="OVER"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 100.0
+offset_bottom = 223.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 100
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Menu" type="Button" parent="OVER"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -18.0
+offset_right = 75.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MENU
+"
+
+[connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_timer_timeout"]
+[connection signal="pressed" from="Menu/Resume" to="Menu" method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu/Menu" to="Menu" method="_on_menu_pressed"]
+[connection signal="pressed" from="OVER/Menu" to="OVER" method="_on_menu_pressed"]

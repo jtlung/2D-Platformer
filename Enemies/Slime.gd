@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
+var dead = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -33,4 +34,13 @@ func _on_sprite_animation_finished():
 
 
 func hit():
-	queue_free()
+	if not dead:
+		dead = true
+		$death.emitting = true
+		$Hitbox.active = false
+		$Sprite.hide()
+		$CollisionShape2D.disabled = true
+		$HurtBox/Shape.disabled = true
+		Global.updateScore(10)
+		await get_tree().create_timer(2).timeout
+		queue_free()

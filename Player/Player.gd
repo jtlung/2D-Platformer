@@ -22,7 +22,7 @@ func attack():
 	$HitBox.hit = false
 	var lookPoint = get_global_mouse_position()
 	var lookVec = position.direction_to(lookPoint).normalized()
-	velocity = lookVec*abs(900)
+	velocity = lookVec*abs(1000)
 	currentSpeed = velocity.x
 	$Sprite.self_modulate = Color(10,10,10)
 	$HitBox.active = true
@@ -56,7 +56,9 @@ func shadowed():
 		shadow.frame = $Sprite.frame
 		var tween = get_tree().create_tween()
 		tween.tween_property(shadow, "modulate:a", 0, time)
-		tween.tween_callback(shadow.queue_free)
+		await get_tree().create_timer(time).timeout
+		if shadow:
+			shadow.queue_free()
 
 func _physics_process(delta):
 	# Gravity an
@@ -66,8 +68,6 @@ func _physics_process(delta):
 		canHoldJump = false
 		velocity.y += gravity * delta
 	if not is_on_floor():
-		if Input.is_action_pressed("Dash"):
-			velocity.y = clamp(velocity.y,-999999,50)
 		if $Sprite.animation != "Fall" and not ($Sprite.animation == "Jump" and $Sprite.is_playing()) and (not Input.is_action_pressed("Jump") or Time.get_ticks_msec()-lastJump >= 500):
 			$Sprite.play("Fall")
 	elif abs(velocity.x) > 50:
@@ -128,14 +128,15 @@ func _physics_process(delta):
 		attack()
 	move_and_slide()
 	
-
+func die():
+	Global.updateLives(-1)
+	Global.loadCurrentLevel()
 
 
 func _on_void_detect_area_entered(area):
 	if area.name == "Void":
-		queue_free()
-		
+		die()
 		
 func hit():
 	if not attacking:
-		queue_free()
+		die()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://boef1vudhbgkf"]
+[gd_scene load_steps=23 format=3 uid="uid://boef1vudhbgkf"]
 
 [ext_resource type="Texture2D" uid="uid://cgfbu4v3aupkm" path="res://Assets/cloudenemy.png" id="1_2wref"]
 [ext_resource type="Script" path="res://Enemies/Cloud.gd" id="1_lgvul"]
+[ext_resource type="Texture2D" uid="uid://deo4gk2c4y31p" path="res://Assets/cloudparticle.png" id="3_24aka"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i6c4r"]
 atlas = ExtResource("1_2wref")
@@ -99,6 +100,35 @@ size = Vector2(200, 120)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnf8o"]
 size = Vector2(100, 100)
 
+[sub_resource type="Gradient" id="Gradient_bw61k"]
+offsets = PackedFloat32Array(0, 0.61157, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n7i3f"]
+gradient = SubResource("Gradient_bw61k")
+
+[sub_resource type="Curve" id="Curve_mrd8w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.4, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_li54o"]
+curve = SubResource("Curve_mrd8w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1p177"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 175.91
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_li54o")
+color_ramp = SubResource("GradientTexture1D_n7i3f")
+
 [node name="Cloud" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 0
@@ -114,16 +144,26 @@ sprite_frames = SubResource("SpriteFrames_vb2qu")
 animation = &"attack"
 autoplay = "idle"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 2048
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="Shape" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_315tu")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dnf8o")
+
+[node name="death" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_1p177")
+texture = ExtResource("3_24aka")
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.8
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
