@@ -2,7 +2,9 @@ extends Node
 var lives = 3
 var time = 180
 var score = 0
+var prevScore = 0
 var currentlevel = 1
+var musicTime = 0
 var over = false
 
 
@@ -40,6 +42,7 @@ func updateTime(tim):
 	
 func loadCurrentLevel():
 	if lives > 0:
+		score = prevScore
 		SceneTransition.change_scene_to_file("res://level"+str(currentlevel)+".tscn")
 	else:
 		over = true
@@ -49,6 +52,8 @@ func loadCurrentLevel():
 		
 func finishLevel():
 	currentlevel += 1
+	prevScore = score
+	musicTime = 0
 	loadCurrentLevel()
 
 

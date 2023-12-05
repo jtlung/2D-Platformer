@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://lgkjieaknk0c"]
+[gd_scene load_steps=17 format=3 uid="uid://lgkjieaknk0c"]
 
 [ext_resource type="Texture2D" uid="uid://bkf6wsmrwjct1" path="res://Assets/bigclouds.png" id="1_1envo"]
 [ext_resource type="PackedScene" uid="uid://bkgy2p5iqqaki" path="res://dirt_grass.tscn" id="1_2kx76"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bdjlkup0xv400" path="res://UI.tscn" id="7_y4yyr"]
 [ext_resource type="Theme" uid="uid://cxvj114cqd3ke" path="res://Assets/main.tres" id="9_jh5mu"]
 [ext_resource type="Texture2D" uid="uid://d0avcbyp1t7xv" path="res://Assets/sunlayer.png" id="11_wp7am"]
+[ext_resource type="AudioStream" uid="uid://4eyo0gsc1a0i" path="res://Assets/Sounds/insectfactory.mp3" id="15_j1fh5"]
+[ext_resource type="Script" path="res://Music.gd" id="16_m8dj2"]
 
 [node name="Game" type="Node2D"]
 
@@ -220,6 +222,13 @@ motion_mirroring = Vector2(1920, 0)
 position = Vector2(-576, -368)
 texture = ExtResource("2_cllfn")
 centered = false
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_j1fh5")
+autoplay = true
+max_distance = 5e+18
+panning_strength = 0.0
+script = ExtResource("16_m8dj2")
 
 [editable path="Map/Terrain/dirt_grass"]
 [editable path="Map/Terrain/grass platform"]

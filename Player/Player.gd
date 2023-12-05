@@ -139,6 +139,10 @@ func die():
 		$die.play()
 		$Sprite.hide()
 		$Dead.show()
+		var music = get_node_or_null("/root/Game/Music")
+		if music:
+			Global.musicTime = music.get_playback_position()
+			music.stop()
 		var tween = get_tree().create_tween()
 		tween.set_trans(Tween.TRANS_QUAD)
 		tween.tween_property($Dead, "position:y", -100, .1)
