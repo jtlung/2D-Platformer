@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0fflfs6qa6no"]
+
+[ext_resource type="Script" path="res://Misc/flag.gd" id="1_px2ts"]
+[ext_resource type="Texture2D" uid="uid://bgh3p2vw7oeef" path="res://Assets/greenflag.png" id="2_av3af"]
+[ext_resource type="Texture2D" uid="uid://0phdx5c3xpht" path="res://Assets/Bodies/redflag.png" id="2_gokam"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2iat"]
+size = Vector2(26, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jd76u"]
+size = Vector2(128, 160)
+
+[node name="Flag" type="StaticBody2D"]
+z_index = 1
+script = ExtResource("1_px2ts")
+
+[node name="Red" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_gokam")
+
+[node name="Green" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("2_av3af")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_q2iat")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_jd76u")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_flag_body_entered"]

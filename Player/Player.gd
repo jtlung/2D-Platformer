@@ -7,6 +7,7 @@ var currentSpeed = 0.0
 var acceleration = 35
 var deceleration = 15
 var running = false
+var dead = false
 var lastJump = Time.get_ticks_msec()
 var canHoldJump = false
 var attacking = false
@@ -17,6 +18,7 @@ var recovery = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func attack():
+	$attack.play()
 	attacking = true
 	canAttack = false
 	$HitBox.hit = false
@@ -62,13 +64,15 @@ func shadowed():
 
 func _physics_process(delta):
 	# Gravity an
+	if dead:
+		return
 	if Input.is_action_just_released("Jump"):
 		canHoldJump = false
 	if (not (Input.is_action_pressed("Jump") and canHoldJump) or Time.get_ticks_msec()-lastJump >= 500):
 		canHoldJump = false
 		velocity.y += gravity * delta
 	if not is_on_floor():
-		if $Sprite.animation != "Fall" and not ($Sprite.animation == "Jump" and $Sprite.is_playing()) and (not Input.is_action_pressed("Jump") or Time.get_ticks_msec()-lastJump >= 500):
+		if $Sprite.animation != "Fall" and not ($Sprite.animation == "Jump" and $Sprite.is_playing()) and (not Input.is_action_pressed("Jump") or Time.get_ticks_msec()-lastJump >= 200):
 			$Sprite.play("Fall")
 	elif abs(velocity.x) > 50:
 		if running:
@@ -80,6 +84,7 @@ func _physics_process(delta):
 	# Handle Jump.
 	if not attacking and not recovery and Input.is_action_just_pressed("Jump") and is_on_floor():
 		canHoldJump = true
+		$jump.play()
 		lastJump = Time.get_ticks_msec()
 		$Sprite.play("Jump")
 		velocity.y = jumpForce
@@ -129,8 +134,16 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func die():
-	Global.updateLives(-1)
-	Global.loadCurrentLevel()
+	if not dead:
+		dead = true
+		$die.play()
+		$Sprite.hide()
+		$Dead.show()
+		var tween = get_tree().create_tween()
+		tween.set_trans(Tween.TRANS_QUAD)
+		tween.tween_property($Dead, "position:y", -100, .1)
+		await $die.finished
+		Global.updateLives(-1)
 
 
 func _on_void_detect_area_entered(area):

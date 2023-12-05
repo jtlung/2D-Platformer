@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv4wxhtrfgndr"]
+
+[ext_resource type="Script" path="res://Misc/coin.gd" id="1_8i4g2"]
+[ext_resource type="Texture2D" uid="uid://by78sv10i4pqc" path="res://Assets/coin.png" id="1_277eg"]
+[ext_resource type="AudioStream" uid="uid://x4b8j4003djo" path="res://Assets/Sounds/coin.wav" id="3_ge7dr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ycga"]
+radius = 25.0
+
+[node name="Coin" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_8i4g2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_277eg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0ycga")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0ycga")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ge7dr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

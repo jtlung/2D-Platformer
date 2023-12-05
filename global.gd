@@ -11,12 +11,20 @@ func _ready():
 	pass
 	
 func reset():
+	currentlevel = 1
 	lives = 3
 	time = 180
 	score = 0
 
 func updateLives(num):
 	lives += num
+	var HUD = get_node_or_null("/root/Game/UI/HUD")
+	HUD.updateLives()
+	if sign(num) < 0:
+		Global.loadCurrentLevel()
+	
+func setLives(num):
+	lives = num
 	var HUD = get_node_or_null("/root/Game/UI/HUD")
 	HUD.updateLives()
 
@@ -27,15 +35,22 @@ func updateScore(num):
 	
 func updateTime(tim):
 	Global.time += tim
+	if Global.time <= 0:
+		setLives(0)
 	
 func loadCurrentLevel():
 	if lives > 0:
-		get_tree().change_scene_to_file("res://level"+str(currentlevel)+".tscn")
+		SceneTransition.change_scene_to_file("res://level"+str(currentlevel)+".tscn")
 	else:
 		over = true
 		get_tree().paused = true
 		var menu = get_node_or_null("/root/Game/UI/OVER")
 		menu.show()
+		
+func finishLevel():
+	currentlevel += 1
+	loadCurrentLevel()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

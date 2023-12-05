@@ -1,12 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://lgkjieaknk0c"]
+[gd_scene load_steps=15 format=3 uid="uid://lgkjieaknk0c"]
 
+[ext_resource type="Texture2D" uid="uid://bkf6wsmrwjct1" path="res://Assets/bigclouds.png" id="1_1envo"]
 [ext_resource type="PackedScene" uid="uid://bkgy2p5iqqaki" path="res://dirt_grass.tscn" id="1_2kx76"]
+[ext_resource type="PackedScene" uid="uid://cho2kvnbloip3" path="res://Misc/target.tscn" id="2_16wym"]
+[ext_resource type="Texture2D" uid="uid://blv8xe21pins3" path="res://Assets/smallclouds.png" id="2_cllfn"]
 [ext_resource type="PackedScene" uid="uid://qb3rxxuyfl4x" path="res://Enemies/Slime.tscn" id="2_qyxxj"]
+[ext_resource type="PackedScene" uid="uid://c0fflfs6qa6no" path="res://Misc/flag.tscn" id="2_w2h7d"]
 [ext_resource type="PackedScene" uid="uid://boef1vudhbgkf" path="res://Enemies/Cloud.tscn" id="3_vsw2m"]
+[ext_resource type="PackedScene" uid="uid://bv4wxhtrfgndr" path="res://Misc/coin.tscn" id="4_6rni5"]
 [ext_resource type="Script" path="res://Player_Container.gd" id="4_j7lcv"]
 [ext_resource type="PackedScene" uid="uid://dtexigkhgtolg" path="res://Player/player.tscn" id="5_7tbbn"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="6_ql6dw"]
 [ext_resource type="PackedScene" uid="uid://bdjlkup0xv400" path="res://UI.tscn" id="7_y4yyr"]
+[ext_resource type="Theme" uid="uid://cxvj114cqd3ke" path="res://Assets/main.tres" id="9_jh5mu"]
+[ext_resource type="Texture2D" uid="uid://d0avcbyp1t7xv" path="res://Assets/sunlayer.png" id="11_wp7am"]
 
 [node name="Game" type="Node2D"]
 
@@ -14,7 +21,7 @@
 
 [node name="Void" type="Area2D" parent="Map"]
 collision_layer = 32768
-collision_mask = 32768
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Void"]
 polygon = PackedVector2Array(-128, 864, 7680, 864, 7680, 1312, 7680, 2304, -128, 2304)
@@ -32,11 +39,11 @@ polygon = PackedVector2Array(-480, -2368, -480, 2368, 8401.93, 2368, 9792, 2336,
 
 [node name="Line2D" parent="Map/Terrain/dirt_grass" index="0"]
 position = Vector2(-192, 352)
-points = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 11840, 832, 11840, -160, 8384, -160, 8000, -32, 6336, -32, 6336, 800, 3328, 800, 3328, -224, 3136, -224, 3104, -192, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0, 768, 0, 768, -64, 672, -64, 672, 0, -1344, 0)
+points = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 11840, 832, 11840, -160, 8384, -160, 8000, -32, 6496, -32, 6464, 800, 3616, 800, 3616, -224, 3136, -224, 3104, -192, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0, -1344, 0)
 
 [node name="Polygon2D" parent="Map/Terrain/dirt_grass" index="1"]
 position = Vector2(-192, 352)
-polygon = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 11840, 832, 11840, -160, 8384, -160, 8000, -32, 6336, -32, 6336, 800, 3328, 800, 3328, -224, 3136, -224, 3104, -192, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0, 768, 0, 768, -64, 672, -64, 672, 0)
+polygon = PackedVector2Array(-1344, 0, -1344, 896, 640, 896, 11840, 832, 11840, -160, 8384, -160, 8000, -32, 6496, -32, 6464, 800, 3616, 800, 3616, -224, 3136, -224, 3104, -192, 3104, 0, 2240, 0, 2240, 832, 1440, 832, 1440, 0)
 
 [node name="grass platform" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
 
@@ -48,37 +55,69 @@ points = PackedVector2Array(1568, -32, 1568, 32, 2080, 32, 2080, -32, 1568, -32)
 position = Vector2(-192, 320)
 polygon = PackedVector2Array(1568, -32, 1568, 32, 2080, 32, 2080, -32)
 
-[node name="grass platform3" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
-
-[node name="Line2D" parent="Map/Terrain/grass platform3" index="0"]
-position = Vector2(1824, 320)
-points = PackedVector2Array(1600, -32, 1600, 32, 1984, 32, 1984, -32, 1600, -32)
-
-[node name="Polygon2D" parent="Map/Terrain/grass platform3" index="1"]
-position = Vector2(1824, 320)
-polygon = PackedVector2Array(1600, -32, 1600, 32, 1984, 32, 1984, -32)
-
 [node name="grass platform4" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
 
 [node name="Line2D" parent="Map/Terrain/grass platform4" index="0"]
 position = Vector2(2752, 320)
-points = PackedVector2Array(1600, -32, 1600, 32, 1952, 32, 1952, -32, 1600, -32)
+points = PackedVector2Array(1120, -32, 1120, 32, 1600, 32, 1600, -32, 1120, -32)
 
 [node name="Polygon2D" parent="Map/Terrain/grass platform4" index="1"]
 position = Vector2(2752, 320)
-polygon = PackedVector2Array(1600, -32, 1600, 32, 1952, 32, 1952, -32)
+polygon = PackedVector2Array(1120, -32, 1120, 32, 1600, 32, 1600, -32)
 
 [node name="grass platform5" parent="Map/Terrain" instance=ExtResource("1_2kx76")]
 
 [node name="Line2D" parent="Map/Terrain/grass platform5" index="0"]
 position = Vector2(3744, 320)
-points = PackedVector2Array(1568, -32, 1568, 32, 1952, 32, 1952, -32, 1728.65, -32, 1568, -32)
+points = PackedVector2Array(1568, -32, 1568, 32, 2080, 32, 2080, -32, 1728.65, -32, 1568, -32)
 
 [node name="Polygon2D" parent="Map/Terrain/grass platform5" index="1"]
 position = Vector2(3744, 320)
-polygon = PackedVector2Array(1568, -32, 1568, 32, 1952, 32, 1952, -32, 1728.65, -32)
+polygon = PackedVector2Array(1568, -32, 1568, 32, 2080, 32, 2080, -32, 1728.65, -32)
+
+[node name="Flag" parent="Map" instance=ExtResource("2_w2h7d")]
+position = Vector2(8832, 112)
 
 [node name="Collectibles" type="Node" parent="."]
+
+[node name="Target" parent="Collectibles" instance=ExtResource("2_16wym")]
+position = Vector2(1264, 224)
+
+[node name="Target2" parent="Collectibles" instance=ExtResource("2_16wym")]
+position = Vector2(4640, 128)
+
+[node name="Coin" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(144, 304)
+
+[node name="Coin4" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(224, 304)
+
+[node name="Coin3" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(304, 304)
+
+[node name="Coin5" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(2176, 288)
+
+[node name="Coin7" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(3056, 80)
+
+[node name="Coin8" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(3120, 80)
+
+[node name="Coin9" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(3184, 80)
+
+[node name="Coin10" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(4064, 240)
+
+[node name="Coin11" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(4160, 240)
+
+[node name="Coin6" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(5376, 128)
+
+[node name="Coin2" parent="Collectibles" instance=ExtResource("4_6rni5")]
+position = Vector2(7328, 160)
 
 [node name="Enemies" type="Node" parent="."]
 
@@ -89,7 +128,7 @@ position = Vector2(2336, 320)
 position = Vector2(1664, 256)
 
 [node name="Slime6" parent="Enemies" instance=ExtResource("2_qyxxj")]
-position = Vector2(864, 320)
+position = Vector2(672, 320)
 
 [node name="Slime2" parent="Enemies" instance=ExtResource("2_qyxxj")]
 position = Vector2(6592, 288)
@@ -101,10 +140,10 @@ position = Vector2(7552, 288)
 position = Vector2(2688, 128)
 
 [node name="Cloud2" parent="Enemies" instance=ExtResource("3_vsw2m")]
-position = Vector2(5024, 64)
+position = Vector2(5120, 64)
 
 [node name="Cloud3" parent="Enemies" instance=ExtResource("3_vsw2m")]
-position = Vector2(5952, 64)
+position = Vector2(6144, 128)
 
 [node name="Cloud4" parent="Enemies" instance=ExtResource("3_vsw2m")]
 position = Vector2(7136, 96)
@@ -122,10 +161,67 @@ script = ExtResource("6_ql6dw")
 
 [node name="Effects" type="Node" parent="."]
 
+[node name="Text" type="RichTextLabel" parent="."]
+offset_left = -288.0
+offset_top = 192.0
+offset_right = -32.0
+offset_bottom = 372.0
+mouse_filter = 2
+theme = ExtResource("9_jh5mu")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "Hold shift to run!
+"
+fit_content = true
+
+[node name="Text2" type="RichTextLabel" parent="."]
+offset_left = 400.0
+offset_top = 80.0
+offset_right = 656.0
+offset_bottom = 260.0
+mouse_filter = 2
+theme = ExtResource("9_jh5mu")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "Click your mouse to attack!
+"
+fit_content = true
+
 [node name="UI" parent="." instance=ExtResource("7_y4yyr")]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Node2D"]
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Node2D/ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxBackground/ParallaxLayer3"]
+texture_filter = 1
+position = Vector2(304, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_wp7am")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Node2D/ParallaxBackground"]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxBackground/ParallaxLayer"]
+position = Vector2(-560, -400)
+texture = ExtResource("1_1envo")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Node2D/ParallaxBackground"]
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(-576, -368)
+texture = ExtResource("2_cllfn")
+centered = false
 
 [editable path="Map/Terrain/dirt_grass"]
 [editable path="Map/Terrain/grass platform"]
-[editable path="Map/Terrain/grass platform3"]
 [editable path="Map/Terrain/grass platform4"]
 [editable path="Map/Terrain/grass platform5"]

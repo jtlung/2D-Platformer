@@ -36,11 +36,12 @@ func _on_sprite_animation_finished():
 func hit():
 	if not dead:
 		dead = true
+		$splat.play()
 		$death.emitting = true
 		$Hitbox.active = false
 		$Sprite.hide()
 		$CollisionShape2D.disabled = true
 		$HurtBox/Shape.disabled = true
 		Global.updateScore(10)
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(6).timeout
 		queue_free()

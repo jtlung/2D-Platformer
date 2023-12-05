@@ -1,37 +1,37 @@
 [gd_scene load_steps=12 format=3 uid="uid://bttbn1ok55ilj"]
 
-[ext_resource type="Texture2D" uid="uid://bkmtnb00l7y20" path="res://Assets/lightning.png" id="1_5ckpj"]
 [ext_resource type="Script" path="res://Enemies/lightning.gd" id="1_6wunm"]
+[ext_resource type="Texture2D" uid="uid://bkmtnb00l7y20" path="res://Assets/Bodies/lightning.png" id="2_d8wrf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ir73"]
-size = Vector2(50, 200)
+size = Vector2(35, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s6sto"]
-atlas = ExtResource("1_5ckpj")
+atlas = ExtResource("2_d8wrf")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0isj8"]
-atlas = ExtResource("1_5ckpj")
+atlas = ExtResource("2_d8wrf")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bllk0"]
-atlas = ExtResource("1_5ckpj")
+atlas = ExtResource("2_d8wrf")
 region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1p7u5"]
-atlas = ExtResource("1_5ckpj")
+atlas = ExtResource("2_d8wrf")
 region = Rect2(0, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wfx70"]
-atlas = ExtResource("1_5ckpj")
+atlas = ExtResource("2_d8wrf")
 region = Rect2(200, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_msjn4"]
-atlas = ExtResource("1_5ckpj")
+atlas = ExtResource("2_d8wrf")
 region = Rect2(400, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b7evo"]
-atlas = ExtResource("1_5ckpj")
+atlas = ExtResource("2_d8wrf")
 region = Rect2(0, 400, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kykmj"]
@@ -75,6 +75,7 @@ debug_color = Color(0.898039, 0, 0.294118, 0.419608)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_kykmj")
 autoplay = "default"
 frame_progress = 0.777511

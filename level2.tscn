@@ -1,0 +1,257 @@
+[gd_scene load_steps=12 format=3 uid="uid://bwishooibfn4b"]
+
+[ext_resource type="PackedScene" uid="uid://bkgy2p5iqqaki" path="res://dirt_grass.tscn" id="1_gv6sy"]
+[ext_resource type="PackedScene" uid="uid://c0fflfs6qa6no" path="res://Misc/flag.tscn" id="2_yngkd"]
+[ext_resource type="PackedScene" uid="uid://cho2kvnbloip3" path="res://Misc/target.tscn" id="3_kttim"]
+[ext_resource type="PackedScene" uid="uid://bv4wxhtrfgndr" path="res://Misc/coin.tscn" id="4_0l00u"]
+[ext_resource type="PackedScene" uid="uid://qb3rxxuyfl4x" path="res://Enemies/Slime.tscn" id="4_c623g"]
+[ext_resource type="PackedScene" uid="uid://boef1vudhbgkf" path="res://Enemies/Cloud.tscn" id="5_upuh1"]
+[ext_resource type="Script" path="res://Player_Container.gd" id="6_moddg"]
+[ext_resource type="PackedScene" uid="uid://dtexigkhgtolg" path="res://Player/player.tscn" id="7_q3bmi"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="8_m8map"]
+[ext_resource type="PackedScene" uid="uid://bdjlkup0xv400" path="res://UI.tscn" id="9_xv0q0"]
+[ext_resource type="Theme" uid="uid://cxvj114cqd3ke" path="res://Assets/main.tres" id="10_q6k32"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Map" type="Node" parent="."]
+
+[node name="Void" type="Area2D" parent="Map"]
+collision_layer = 32768
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Void"]
+polygon = PackedVector2Array(-128, 864, 11376, 864, 11376, 2208, -128, 2304)
+
+[node name="Borders" type="StaticBody2D" parent="Map"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Borders"]
+polygon = PackedVector2Array(-480, -2368, -480, 2368, 8401.93, 2368, 14816, 2240, 14912, -2016, 14016, -2112, 14016, 2112, -320, 2240, -320, -2368)
+
+[node name="Terrain" type="Node2D" parent="Map"]
+
+[node name="dirt_grass" parent="Map/Terrain" instance=ExtResource("1_gv6sy")]
+
+[node name="Line2D" parent="Map/Terrain/dirt_grass" index="0"]
+position = Vector2(-192, 352)
+points = PackedVector2Array(-1344, 0, -1344, 896, 1440, 896, 1440, -192, 928, -192, 320, 0, -1344, 0)
+
+[node name="Polygon2D" parent="Map/Terrain/dirt_grass" index="1"]
+position = Vector2(-192, 352)
+polygon = PackedVector2Array(-1344, 0, -1344, 896, 1440, 896, 1440, -192, 928, -192, 320, 0)
+
+[node name="grass platform" parent="Map/Terrain" instance=ExtResource("1_gv6sy")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform" index="0"]
+position = Vector2(-384, -32)
+points = PackedVector2Array(1568, -32, 1568, 32, 2176, 32, 2176, -32, 1568, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform" index="1"]
+position = Vector2(-384, -32)
+polygon = PackedVector2Array(1568, -32, 1568, 32, 2176, 32, 2176, -32)
+
+[node name="grass platform2" parent="Map/Terrain" instance=ExtResource("1_gv6sy")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform2" index="0"]
+position = Vector2(1728, 160)
+points = PackedVector2Array(1728, -32, 1728, 32, 4000, 32, 4000, -32, 1728, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform2" index="1"]
+position = Vector2(1728, 160)
+polygon = PackedVector2Array(1728, -32, 1728, 32, 4000, 32, 4000, -32)
+
+[node name="grass platform3" parent="Map/Terrain" instance=ExtResource("1_gv6sy")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform3" index="0"]
+position = Vector2(3872, 448)
+points = PackedVector2Array(1856, -32, 1856, 1376, 4160, 1376, 4160, -384, 3552, -384, 3552, 32, 3296, 32, 3296, -160, 3104, -160, 3104, -32, 1856, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform3" index="1"]
+position = Vector2(3872, 448)
+polygon = PackedVector2Array(1856, -32, 1856, 1376, 4160, 1376, 4160, -384, 3552, -384, 3552, 32, 3296, 32, 3296, -160, 3104, -160, 3104, -32)
+
+[node name="grass platform4" parent="Map/Terrain" instance=ExtResource("1_gv6sy")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform4" index="0"]
+position = Vector2(4576, -224)
+points = PackedVector2Array(2080, -32, 2080, 32, 4000, 32, 4000, -32, 2080, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform4" index="1"]
+position = Vector2(4576, -224)
+polygon = PackedVector2Array(2080, -32, 2080, 32, 4000, 32, 4000, -32)
+
+[node name="grass platform6" parent="Map/Terrain" instance=ExtResource("1_gv6sy")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform6" index="0"]
+position = Vector2(8928, -608)
+points = PackedVector2Array(2080, 32, 2080, 2848, 7040, 2816, 7040, -32, 2144, -32, 2080, 32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform6" index="1"]
+position = Vector2(8928, -608)
+polygon = PackedVector2Array(2080, 32, 2080, 2848, 7040, 2816, 7040, -32, 2144, -32)
+
+[node name="grass platform5" parent="Map/Terrain" instance=ExtResource("1_gv6sy")]
+
+[node name="Line2D" parent="Map/Terrain/grass platform5" index="0"]
+position = Vector2(6432, 384)
+points = PackedVector2Array(2080, -32, 2080, 1824, 3808, 1824, 3808, -32, 3552, -32, 3552, 1056, 2656, 1056, 2656, -32, 2080, -32)
+
+[node name="Polygon2D" parent="Map/Terrain/grass platform5" index="1"]
+position = Vector2(6432, 384)
+polygon = PackedVector2Array(2080, -32, 2080, 1824, 3808, 1824, 3808, -32, 3552, -32, 3552, 1056, 2656, 1056, 2656, -32)
+
+[node name="Flag" parent="Map" instance=ExtResource("2_yngkd")]
+position = Vector2(12512, -720)
+
+[node name="Collectibles" type="Node" parent="."]
+
+[node name="Target" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(2080, -160)
+
+[node name="Target2" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(2496, -224)
+
+[node name="Target4" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(2944, -224)
+
+[node name="Target3" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(3456, -32)
+
+[node name="Target5" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(6432, -160)
+
+[node name="Target6" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(8384, 160)
+
+[node name="Target7" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(10304, 128)
+
+[node name="Target10" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(10544, -288)
+
+[node name="Target12" parent="Collectibles" instance=ExtResource("3_kttim")]
+position = Vector2(10784, -640)
+
+[node name="Coin" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(192, 288)
+
+[node name="Coin2" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(384, 224)
+
+[node name="Coin3" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(576, 160)
+
+[node name="Coin4" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(2720, -352)
+
+[node name="Coin5" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(6880, -320)
+
+[node name="Coin6" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(7072, -320)
+
+[node name="Coin7" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(7072, -320)
+
+[node name="Coin8" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(7264, -320)
+
+[node name="Coin9" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(7456, -320)
+
+[node name="Coin10" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(7616, -320)
+
+[node name="Coin11" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(7776, -320)
+
+[node name="Coin15" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(7936, -320)
+
+[node name="Coin16" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(8112, -320)
+
+[node name="Coin12" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(11760, -816)
+
+[node name="Coin14" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(11824, -816)
+
+[node name="Coin13" parent="Collectibles" instance=ExtResource("4_0l00u")]
+position = Vector2(11696, -816)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Slime8" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(3840, 96)
+
+[node name="Slime9" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(4256, 96)
+
+[node name="Slime10" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(5312, 96)
+
+[node name="Slime11" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(5536, 96)
+
+[node name="Slime12" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(6624, 384)
+
+[node name="Slime13" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(7072, 224)
+
+[node name="Slime14" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(11376, -672)
+
+[node name="Slime15" parent="Enemies" instance=ExtResource("4_c623g")]
+position = Vector2(12096, -672)
+rotation = -0.0842913
+
+[node name="Cloud" parent="Enemies" instance=ExtResource("5_upuh1")]
+position = Vector2(1088, -224)
+
+[node name="Cloud2" parent="Enemies" instance=ExtResource("5_upuh1")]
+position = Vector2(4736, -144)
+
+[node name="Cloud3" parent="Enemies" instance=ExtResource("5_upuh1")]
+position = Vector2(6144, 64)
+
+[node name="Cloud4" parent="Enemies" instance=ExtResource("5_upuh1")]
+position = Vector2(9568, 64)
+
+[node name="Player_Container" type="Node" parent="."]
+script = ExtResource("6_moddg")
+
+[node name="Player" parent="Player_Container" instance=ExtResource("7_q3bmi")]
+position = Vector2(10176, 288)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.85, 0.85)
+limit_bottom = 800
+script = ExtResource("8_m8map")
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("9_xv0q0")]
+
+[node name="Text" type="RichTextLabel" parent="."]
+offset_left = 7168.0
+offset_top = 64.0
+offset_right = 7424.0
+offset_bottom = 244.0
+mouse_filter = 2
+theme = ExtResource("10_q6k32")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "Hold Jump to jump higher!"
+fit_content = true
+
+[editable path="Map/Terrain/dirt_grass"]
+[editable path="Map/Terrain/grass platform"]
+[editable path="Map/Terrain/grass platform2"]
+[editable path="Map/Terrain/grass platform3"]
+[editable path="Map/Terrain/grass platform4"]
+[editable path="Map/Terrain/grass platform6"]
+[editable path="Map/Terrain/grass platform5"]

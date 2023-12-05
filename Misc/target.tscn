@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cho2kvnbloip3"]
+
+[ext_resource type="Script" path="res://Misc/target.gd" id="1_cp2hx"]
+[ext_resource type="Texture2D" uid="uid://diet1tcaloqbu" path="res://Assets/Bodies/target.png" id="2_t3awl"]
+[ext_resource type="Texture2D" uid="uid://d15jh86h634c6" path="res://Assets/Bodies/targetbroken.png" id="3_rs8eg"]
+[ext_resource type="AudioStream" uid="uid://bnqi1rhpx26dj" path="res://Assets/Sounds/break.wav" id="4_tx0j3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_17bix"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_toiyu"]
+
+[node name="Target" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_cp2hx")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_t3awl")
+
+[node name="Broken" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("3_rs8eg")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_17bix")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_toiyu")
+disabled = true
+
+[node name="wood" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tx0j3")
+volume_db = -5.0

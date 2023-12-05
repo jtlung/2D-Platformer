@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwi5i3qu5r7op"]
+[gd_scene load_steps=5 format=3 uid="uid://cwi5i3qu5r7op"]
 
 [ext_resource type="Theme" uid="uid://cxvj114cqd3ke" path="res://Assets/main.tres" id="1_oijih"]
 [ext_resource type="Script" path="res://Main Menu.gd" id="2_resid"]
 [ext_resource type="Texture2D" uid="uid://bb71q5flbhq66" path="res://Assets/mainmenu.png" id="3_8hgss"]
+[ext_resource type="AudioStream" uid="uid://d4et407p3gueq" path="res://Assets/Sounds/menu.mp3" id="4_bi2ds"]
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -17,6 +18,7 @@ theme = ExtResource("1_oijih")
 script = ExtResource("2_resid")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(2.31, 2.31)
 texture = ExtResource("3_8hgss")
 centered = false
@@ -66,6 +68,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "QUIT
 "
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bi2ds")
+autoplay = true
+panning_strength = 0.0
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

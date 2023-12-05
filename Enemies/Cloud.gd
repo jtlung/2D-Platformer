@@ -18,6 +18,7 @@ func hit():
 		$Sprite.hide()
 		$CollisionShape2D.disabled = true
 		$HurtBox/Shape.disabled = true
+		$poof.play()
 		Global.updateScore(30)
 		await get_tree().create_timer(3).timeout
 		queue_free()
@@ -26,12 +27,13 @@ func attack():
 	var folder = get_node_or_null("/root/Game/Effects")
 	var player = get_node_or_null("/root/Game/Player_Container/Player")
 	if folder and player and not dead:
-		if global_position.distance_to(player.global_position) < 500:
+		if global_position.distance_to(player.global_position) < 800:
 			var spark = Spark.instantiate()
 			spark.global_position = global_position
 			var look = global_position.direction_to(player.position)
 			spark.rotation = PI/2+look.angle()
 			folder.add_child(spark)
+			$zap.play()
 		else:
 			$Timer.start()
 	else:

@@ -1,51 +1,53 @@
-[gd_scene load_steps=23 format=3 uid="uid://boef1vudhbgkf"]
+[gd_scene load_steps=25 format=3 uid="uid://boef1vudhbgkf"]
 
-[ext_resource type="Texture2D" uid="uid://cgfbu4v3aupkm" path="res://Assets/cloudenemy.png" id="1_2wref"]
 [ext_resource type="Script" path="res://Enemies/Cloud.gd" id="1_lgvul"]
+[ext_resource type="Texture2D" uid="uid://cgfbu4v3aupkm" path="res://Assets/Bodies/cloudenemy.png" id="2_etu1a"]
 [ext_resource type="Texture2D" uid="uid://deo4gk2c4y31p" path="res://Assets/cloudparticle.png" id="3_24aka"]
+[ext_resource type="AudioStream" uid="uid://ddodbtm00o2tc" path="res://Assets/Sounds/poof.mp3" id="4_snuyk"]
+[ext_resource type="AudioStream" uid="uid://dttpagtpnusvn" path="res://Assets/Sounds/zap.wav" id="5_ly5i0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i6c4r"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gtxvc"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(0, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sw83g"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(200, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8j8f"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(400, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r08rh"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(600, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q7urx"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(0, 400, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwmh3"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(200, 400, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_co5v4"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(400, 400, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ysdi"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52faj"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wokh6"]
-atlas = ExtResource("1_2wref")
+atlas = ExtResource("2_etu1a")
 region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vb2qu"]
@@ -140,6 +142,7 @@ one_shot = true
 autostart = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_vb2qu")
 animation = &"attack"
 autoplay = "idle"
@@ -164,6 +167,15 @@ lifetime = 2.0
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.8
+
+[node name="poof" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_snuyk")
+volume_db = 5.0
+
+[node name="zap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ly5i0")
+volume_db = 5.0
+pitch_scale = 0.5
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
