@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://s8x4bfbbahoq"]
 
-[ext_resource type="Script" path="res://terrain.gd" id="1_1dmbu"]
+[ext_resource type="Script" path="res://Terrain.gd" id="1_1dmbu"]
 [ext_resource type="Texture2D" uid="uid://3dg2de3e006m" path="res://Assets/dirt.png" id="2_ohdfd"]
 
 [node name="Terrain" type="StaticBody2D"]
