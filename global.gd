@@ -4,6 +4,7 @@ var time = 180
 var score = 0
 var prevScore = 0
 var currentlevel = 1
+var finallevel = 3
 var musicTime = 0
 var over = false
 
@@ -17,6 +18,7 @@ func reset():
 	lives = 3
 	time = 180
 	score = 0
+	musicTime = 0
 
 func updateLives(num):
 	lives += num
@@ -41,7 +43,7 @@ func updateTime(tim):
 		setLives(0)
 	
 func loadCurrentLevel():
-	if lives > 0:
+	if lives > 0 and currentlevel < finallevel:
 		score = prevScore
 		SceneTransition.change_scene_to_file("res://level"+str(currentlevel)+".tscn")
 	else:

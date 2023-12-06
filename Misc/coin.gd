@@ -11,5 +11,6 @@ func _on_area_2d_body_entered(body):
 		Global.updateScore(50)
 		$AudioStreamPlayer2D.play()
 		$Sprite2D.hide()
+		$sparkle.emitting = true
 		await get_tree().create_timer(3).timeout
 		queue_free()
