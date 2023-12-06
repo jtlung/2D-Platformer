@@ -9,6 +9,7 @@ Custom animated sprites
 SFX
 Music
 Particle Effects
+Fade to black scene transition
 Two Enemies
   - Cloud enemy that zaps you with lightning
   - Simple slime enemy that jumps
