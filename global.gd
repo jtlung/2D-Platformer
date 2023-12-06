@@ -43,9 +43,11 @@ func updateTime(tim):
 		setLives(0)
 	
 func loadCurrentLevel():
-	if lives > 0 and currentlevel < finallevel:
+	if lives > 0 and currentlevel <= finallevel:
 		score = prevScore
 		SceneTransition.change_scene_to_file("res://level"+str(currentlevel)+".tscn")
+	elif lives > 0 and currentlevel == finallevel+1:
+		SceneTransition.change_scene_to_file("res://end_screen.tscn")
 	else:
 		over = true
 		get_tree().paused = true
